@@ -117,6 +117,7 @@ CLogFont GetLogFont(TextRenderer::FONT_TYPE type) {
       CLogFont font;
       font.SetMessageBoxFont();
       font.MakeLarger(3);
+      font.lfHeight *= 2;
       font.lfWeight = FW_BOLD;
       return font;
     }
@@ -124,6 +125,7 @@ CLogFont GetLogFont(TextRenderer::FONT_TYPE type) {
       CLogFont font;
       font.SetMessageBoxFont();
       font.MakeLarger(3);
+      font.lfHeight *= 2;
       font.lfWeight = FW_NORMAL;
       return font;
     }
@@ -133,6 +135,7 @@ CLogFont GetLogFont(TextRenderer::FONT_TYPE type) {
     case TextRenderer::FONTSET_FOOTER_SUBLABEL: {
       CLogFont font;
       font.SetMessageBoxFont();
+      font.lfHeight *= 2;
       font.lfWeight = FW_NORMAL;
       return font;
     }
@@ -171,6 +174,7 @@ CLogFont GetLogFont(TextRenderer::FONT_TYPE type) {
   LOG(DFATAL) << "Unknown type: " << type;
   CLogFont font;
   font.SetMessageBoxFont();
+  font.lfHeight *= 2;
   return font;
 }
 
@@ -182,7 +186,7 @@ DWORD GetGdiDrawTextStyle(TextRenderer::FONT_TYPE type) {
       return DT_LEFT | DT_VCENTER | DT_SINGLELINE | DT_NOPREFIX;
     case TextRenderer::FONTSET_FOOTER_INDEX:
       return DT_RIGHT | DT_VCENTER | DT_SINGLELINE | DT_NOPREFIX;
-    case TextRenderer::FONTSET_FOOTER_LABEL:
+    case TextRenderer::FONTSET_FOOTER_LABEL:  //change  
       return DT_CENTER | DT_VCENTER | DT_SINGLELINE | DT_NOPREFIX;
     case TextRenderer::FONTSET_FOOTER_SUBLABEL:
       return DT_CENTER | DT_VCENTER | DT_SINGLELINE | DT_NOPREFIX;
