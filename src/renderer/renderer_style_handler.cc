@@ -211,17 +211,17 @@ void RendererStyleHandler::GetDPIScalingFactor(double *x, double *y) {
   const int dpi_x = desktop_dc.GetDeviceCaps(LOGPIXELSX);
   const int dpi_y = desktop_dc.GetDeviceCaps(LOGPIXELSY);
   if (x != nullptr) {
-    *x = static_cast<double>(dpi_x) / kDefaultDPI;
+    *x = static_cast<double>(dpi_x) / kDefaultDPI * 2;
   }
   if (y != nullptr) {
-    *y = static_cast<double>(dpi_y) / kDefaultDPI;
+    *y = static_cast<double>(dpi_y) / kDefaultDPI * 2;
   }
 #else   // _WIN32
   if (x != nullptr) {
-    *x = 1.0;
+    *x = 2.0;
   }
   if (y != nullptr) {
-    *y = 1.0;
+    *y = 2.0;
   }
 #endif  // !_WIN32
 }
