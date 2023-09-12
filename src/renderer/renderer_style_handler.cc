@@ -82,6 +82,8 @@ void RendererStyleHandlerImpl::GetDefaultRendererStyle(RendererStyle *style) {
   double scale_factor_x = 1.0;
   double scale_factor_y = 1.0;
   RendererStyleHandler::GetDPIScalingFactor(&scale_factor_x, &scale_factor_y);
+ scale_factor_x *= 2;
+ scale_factor_y *= 2;
 
   // TODO(horo): Change to read from human-readable ASCII format protobuf.
   style->Clear();
