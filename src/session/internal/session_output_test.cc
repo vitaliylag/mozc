@@ -653,7 +653,7 @@ TEST(SessionOutputTest, FillFooter) {
 #else   // CHANNEL_DEV && GOOGLE_JAPANESE_INPUT_BUILD
   EXPECT_TRUE(candidates.footer().has_label());
   EXPECT_FALSE(candidates.footer().has_sub_label());
-  constexpr char kLabel[] = "Tabキーで選択";
+  constexpr char kLabel[] = "";
   EXPECT_EQ(candidates.footer().label(), kLabel);
 #endif  // CHANNEL_DEV && GOOGLE_JAPANESE_INPUT_BUILD
 
