@@ -747,7 +747,7 @@ TEST_F(SessionConverterTest, MultiSegmentsConversion) {
     EXPECT_EQ(candidates.position(), 0);
     EXPECT_EQ(candidates.candidate(0).value(), kKamabokono);
     EXPECT_EQ(candidates.candidate(1).value(), "カマボコの");
-    EXPECT_EQ(candidates.candidate(2).value(), "そのほかの文字種");
+    EXPECT_EQ(candidates.candidate(2).value(), "…");
   }
 
   // Test for segment motion. [SegmentFocusRight]
@@ -770,7 +770,7 @@ TEST_F(SessionConverterTest, MultiSegmentsConversion) {
     EXPECT_EQ(candidates.position(), 5);
     EXPECT_EQ(candidates.candidate(0).value(), "陰謀");
     EXPECT_EQ(candidates.candidate(1).value(), "印房");
-    EXPECT_EQ(candidates.candidate(2).value(), "そのほかの文字種");
+    EXPECT_EQ(candidates.candidate(2).value(), "…");
   }
 
   // Test for segment motion. [SegmentFocusLeft]
@@ -793,7 +793,7 @@ TEST_F(SessionConverterTest, MultiSegmentsConversion) {
     EXPECT_EQ(candidates.position(), 0);
     EXPECT_EQ(candidates.candidate(0).value(), kKamabokono);
     EXPECT_EQ(candidates.candidate(1).value(), "カマボコの");
-    EXPECT_EQ(candidates.candidate(2).value(), "そのほかの文字種");
+    EXPECT_EQ(candidates.candidate(2).value(), "…");
   }
 
   // Test for segment motion. [SegmentFocusLeft] at the head of segments.
@@ -819,7 +819,7 @@ TEST_F(SessionConverterTest, MultiSegmentsConversion) {
     EXPECT_EQ(candidates.position(), 5);
     EXPECT_EQ(candidates.candidate(0).value(), "陰謀");
     EXPECT_EQ(candidates.candidate(1).value(), "印房");
-    EXPECT_EQ(candidates.candidate(2).value(), "そのほかの文字種");
+    EXPECT_EQ(candidates.candidate(2).value(), "…");
   }
 
   // Test for segment motion. [SegmentFocusRight] at the tail of segments.
@@ -845,7 +845,7 @@ TEST_F(SessionConverterTest, MultiSegmentsConversion) {
     EXPECT_EQ(candidates.position(), 0);
     EXPECT_EQ(candidates.candidate(0).value(), kKamabokono);
     EXPECT_EQ(candidates.candidate(1).value(), "カマボコの");
-    EXPECT_EQ(candidates.candidate(2).value(), "そのほかの文字種");
+    EXPECT_EQ(candidates.candidate(2).value(), "…");
   }
 
   // Test for candidate motion. [CandidateNext]
@@ -868,7 +868,7 @@ TEST_F(SessionConverterTest, MultiSegmentsConversion) {
     EXPECT_EQ(candidates.position(), 5);
     EXPECT_EQ(candidates.candidate(0).value(), "陰謀");
     EXPECT_EQ(candidates.candidate(1).value(), "印房");
-    EXPECT_EQ(candidates.candidate(2).value(), "そのほかの文字種");
+    EXPECT_EQ(candidates.candidate(2).value(), "…");
 
     const commands::Preedit &conversion = output.preedit();
     EXPECT_EQ(conversion.segment(0).value(), kKamabokono);
@@ -915,7 +915,7 @@ TEST_F(SessionConverterTest, MultiSegmentsConversion) {
 
     EXPECT_EQ(candidates.candidate(1).value(), "陰謀");
 
-    EXPECT_EQ(candidates.candidate(2).value(), "そのほかの文字種");
+    EXPECT_EQ(candidates.candidate(2).value(), "…");
 
     const commands::Preedit &conversion = output.preedit();
     EXPECT_EQ(conversion.segment(0).value(), kKamabokono);
@@ -979,7 +979,7 @@ TEST_F(SessionConverterTest, Transliterations) {
   const commands::Candidates &candidates = output.candidates();
   EXPECT_EQ(candidates.size(), 2);  // one candidate + one t13n sub list.
   EXPECT_EQ(candidates.focused_index(), 1);
-  EXPECT_EQ(candidates.candidate(1).value(), "そのほかの文字種");
+  EXPECT_EQ(candidates.candidate(1).value(), "…");
 
   std::vector<std::string> t13ns;
   composer_->GetTransliterations(&t13ns);
