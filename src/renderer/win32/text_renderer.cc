@@ -186,7 +186,7 @@ DWORD GetGdiDrawTextStyle(TextRenderer::FONT_TYPE type) {
       return DT_LEFT | DT_VCENTER | DT_SINGLELINE | DT_NOPREFIX;
     case TextRenderer::FONTSET_FOOTER_INDEX:
       return DT_CENTER | DT_VCENTER | DT_SINGLELINE | DT_NOPREFIX;  //myStyle
-    case TextRenderer::FONTSET_FOOTER_LABEL:  //change  
+    case TextRenderer::FONTSET_FOOTER_LABEL:
       return DT_CENTER | DT_VCENTER | DT_SINGLELINE | DT_NOPREFIX;
     case TextRenderer::FONTSET_FOOTER_SUBLABEL:
       return DT_CENTER | DT_VCENTER | DT_SINGLELINE | DT_NOPREFIX;
