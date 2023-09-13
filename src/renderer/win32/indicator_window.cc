@@ -269,7 +269,7 @@ class IndicatorWindow::WindowImpl
     info.blur_sigma = dpi_scaling_ * 3.0;
     info.blur_alpha = 0.5;
     info.frame_thickness = dpi_scaling_ * 1.0;
-    info.label_size = 13.0;  // no need to be scaled.
+    info.label_size = 13.0 * 1.5;  // no need to be scaled.  //mySize
     info.label_color = RGBColor(0, 0, 0);
     info.blur_offset_x = 0;
     info.blur_offset_y = 0;
