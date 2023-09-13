@@ -566,7 +566,7 @@ void CandidateWindow::UpdateLayout(const commands::Candidates &candidates) {
       std::wstring text = L'  ' + shortcut + L' ';  //myStyle
       const Size rendering_size =
           text_renderer_->MeasureString(TextRenderer::FONTSET_SHORTCUT, text);
-      table_layout_->EnsureCellSize(COLUMN_SHORTCUT, rendering_size + 2);  //myStyle
+      table_layout_->EnsureCellSize(COLUMN_SHORTCUT, Size(rendering_size.width + 2, rendering_size.height));  //myStyle
     }
 
     if (!candidate_string.empty()) {
