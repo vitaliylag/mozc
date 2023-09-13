@@ -117,7 +117,7 @@ CLogFont GetLogFont(TextRenderer::FONT_TYPE type) {
       CLogFont font;
       font.SetMessageBoxFont();
       font.MakeLarger(3);
-      font.lfHeight *= 2;
+      font.lfHeight = font.lfHeight * 3 / 2;  //mySize
       font.lfWeight = FW_BOLD;
       return font;
     }
@@ -125,7 +125,7 @@ CLogFont GetLogFont(TextRenderer::FONT_TYPE type) {
       CLogFont font;
       font.SetMessageBoxFont();
       font.MakeLarger(3);
-      font.lfHeight *= 2;
+      font.lfHeight = font.lfHeight * 3 / 2;  //mySize
       font.lfWeight = FW_NORMAL;
       return font;
     }
@@ -135,7 +135,7 @@ CLogFont GetLogFont(TextRenderer::FONT_TYPE type) {
     case TextRenderer::FONTSET_FOOTER_SUBLABEL: {
       CLogFont font;
       font.SetMessageBoxFont();
-      font.lfHeight *= 2;
+      font.lfHeight = font.lfHeight * 3 / 2;  //mySize
       font.lfWeight = FW_NORMAL;
       return font;
     }
@@ -174,7 +174,7 @@ CLogFont GetLogFont(TextRenderer::FONT_TYPE type) {
   LOG(DFATAL) << "Unknown type: " << type;
   CLogFont font;
   font.SetMessageBoxFont();
-  font.lfHeight *= 2;
+  font.lfHeight = font.lfHeight * 3 / 2;  //mySize
   return font;
 }
 
