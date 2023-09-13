@@ -148,9 +148,9 @@ void RendererStyleHandlerImpl::GetDefaultRendererStyle(RendererStyle *style) {
   style->mutable_footer_top_color()->set_g(0xfc);  //myStyle
   style->mutable_footer_top_color()->set_b(0xfc);  //myStyle
 
-  style->mutable_footer_bottom_color()->set_r(0xf2);  //myStyle
-  style->mutable_footer_bottom_color()->set_g(0xf2);  //myStyle
-  style->mutable_footer_bottom_color()->set_b(0xf2);  //myStyle
+  style->mutable_footer_bottom_color()->set_r(0xf0);  //myStyle
+  style->mutable_footer_bottom_color()->set_g(0xf0);  //myStyle
+  style->mutable_footer_bottom_color()->set_b(0xf0);  //myStyle
 
   style->set_logo_file_name("candidate_window_logo.tiff");
 
