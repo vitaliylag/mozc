@@ -70,15 +70,15 @@ CRect ToCRect(const Rect &rect) {
 COLORREF GetTextColor(TextRenderer::FONT_TYPE type) {
   switch (type) {
     case TextRenderer::FONTSET_SHORTCUT:
-      return RGB(0x61, 0x61, 0x61);
+      return RGB(0x97, 0x97, 0x97);
     case TextRenderer::FONTSET_CANDIDATE:
       return RGB(0x00, 0x00, 0x00);
     case TextRenderer::FONTSET_DESCRIPTION:
       return RGB(0x88, 0x88, 0x88);
     case TextRenderer::FONTSET_FOOTER_INDEX:
-      return RGB(0x4c, 0x4c, 0x4c);
+      return RGB(0x88, 0x88, 0x88);
     case TextRenderer::FONTSET_FOOTER_LABEL:
-      return RGB(0x4c, 0x4c, 0x4c);
+      return RGB(0x88, 0x88, 0x88);
     case TextRenderer::FONTSET_FOOTER_SUBLABEL:
       return RGB(0xA7, 0xA7, 0xA7);
     default:
@@ -118,7 +118,7 @@ CLogFont GetLogFont(TextRenderer::FONT_TYPE type) {
       font.SetMessageBoxFont();
       font.MakeLarger(3);
       font.lfHeight = font.lfHeight * 3 / 2;  //mySize
-      font.lfWeight = FW_BOLD;
+      font.lfWeight = FW_NORMAL;              //myStyle
       return font;
     }
     case TextRenderer::FONTSET_CANDIDATE: {
@@ -185,7 +185,7 @@ DWORD GetGdiDrawTextStyle(TextRenderer::FONT_TYPE type) {
     case TextRenderer::FONTSET_DESCRIPTION:
       return DT_LEFT | DT_VCENTER | DT_SINGLELINE | DT_NOPREFIX;
     case TextRenderer::FONTSET_FOOTER_INDEX:
-      return DT_RIGHT | DT_VCENTER | DT_SINGLELINE | DT_NOPREFIX;
+      return DT_CENTER | DT_VCENTER | DT_SINGLELINE | DT_NOPREFIX;  //myStyle
     case TextRenderer::FONTSET_FOOTER_LABEL:  //change  
       return DT_CENTER | DT_VCENTER | DT_SINGLELINE | DT_NOPREFIX;
     case TextRenderer::FONTSET_FOOTER_SUBLABEL:
