@@ -87,6 +87,7 @@ const COLORREF kFrameColor                 = RGB(0x96, 0x96, 0x96);
 const COLORREF kShortcutBackgroundColor    = RGB(0xfb, 0xfb, 0xfb);  //myStyle
 const COLORREF kSelectedRowBackgroundColor = RGB(0xd1, 0xe3, 0xff);  //myStyle
 const COLORREF kDefaultBackgroundColor     = RGB(0xfb, 0xfb, 0xfb);  //myStyle
+const COLORREF kDefaultBackgroundColor_sug = RGB(0xf8, 0xf8, 0xf8);  //myStyle
 const COLORREF kSelectedRowFrameColor      = RGB(0xd1, 0xe3, 0xff);  //myStyle
 const COLORREF kIndicatorBackgroundColor   = RGB(0xe0, 0xe0, 0xe0);  //myStyle
 const COLORREF kIndicatorColor             = RGB(0xaa, 0xaa, 0xaa);  //myStyle
@@ -866,7 +867,7 @@ void CandidateWindow::DrawInformationIcon(CDCHandle dc) {
 void CandidateWindow::DrawBackground(CDCHandle dc) {
   const Rect client_rect(Point(0, 0), table_layout_->GetTotalSize());
   const CRect client_crect = ToCRect(client_rect);
-  dc.FillSolidRect(&client_crect, kDefaultBackgroundColor);
+  dc.FillSolidRect(&client_crect, candidates_->has_footer() && candidates_->footer().index_visible() ? kDefaultBackgroundColor : kDefaultBackgroundColor_sug);
 }
 
 void CandidateWindow::DrawFrame(CDCHandle dc) {
