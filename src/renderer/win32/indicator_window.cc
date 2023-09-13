@@ -96,7 +96,7 @@ constexpr int kFadingOutAlphaDelta = 32;
 double GetDPIScaling() {
   CDC desktop_dc(::GetDC(nullptr));
   const int dpi_x = desktop_dc.GetDeviceCaps(LOGPIXELSX);
-  return static_cast<double>(dpi_x) / kDefaultDPI * 2.0;
+  return static_cast<double>(dpi_x) / kDefaultDPI * 1.5;  //mySize
 }
 
 }  // namespace
