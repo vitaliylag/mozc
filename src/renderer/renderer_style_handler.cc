@@ -94,9 +94,9 @@ void RendererStyleHandlerImpl::GetDefaultRendererStyle(RendererStyle *style) {
 
   RendererStyle::TextStyle *shortcutStyle = style->add_text_styles();
   shortcutStyle->set_font_size(14 * scale_factor_y);
-  shortcutStyle->mutable_foreground_color()->set_r(0x97);  //myStyle
-  shortcutStyle->mutable_foreground_color()->set_g(0x97);  //myStyle
-  shortcutStyle->mutable_foreground_color()->set_b(0x97);  //myStyle
+  shortcutStyle->mutable_foreground_color()->set_r(0x9b);  //myStyle
+  shortcutStyle->mutable_foreground_color()->set_g(0x9b);  //myStyle
+  shortcutStyle->mutable_foreground_color()->set_b(0x9b);  //myStyle
   shortcutStyle->mutable_background_color()->set_r(0xfb);
   shortcutStyle->mutable_background_color()->set_g(0xfb);
   shortcutStyle->mutable_background_color()->set_b(0xfb);
