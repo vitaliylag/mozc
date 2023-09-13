@@ -656,7 +656,7 @@ void CandidateWindow::DrawCells(CDCHandle dc) {
     for (size_t i = 0; i < candidates_->candidate_size(); ++i) {
       const commands::Candidates::Candidate &candidate =
           candidates_->candidate(i);
-      const std::wstring display_string =
+      std::wstring display_string =
           GetDisplayStringByColumn(candidate, column_type);
       const Rect text_rect = table_layout_->GetCellRect(i, column_type);
       
