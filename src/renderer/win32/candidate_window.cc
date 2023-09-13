@@ -84,13 +84,13 @@ constexpr char kMinimumCandidateAndDescriptionWidthAsString[] =
 
 // Color scheme
 const COLORREF kFrameColor                 = RGB(0x96, 0x96, 0x96);
-const COLORREF kShortcutBackgroundColor    = RGB(0xfc, 0xfc, 0xfc);  //myStyle
-const COLORREF kSelectedRowBackgroundColor = RGB(0xd1, 0xea, 0xff);  //myStyle
-const COLORREF kDefaultBackgroundColor     = RGB(0xfc, 0xfc, 0xfc);  //myStyle
-const COLORREF kSelectedRowFrameColor      = RGB(0xd1, 0xea, 0xff);  //myStyle
+const COLORREF kShortcutBackgroundColor    = RGB(0xfb, 0xfb, 0xfb);  //myStyle
+const COLORREF kSelectedRowBackgroundColor = RGB(0xd1, 0xe3, 0xff);  //myStyle
+const COLORREF kDefaultBackgroundColor     = RGB(0xfb, 0xfb, 0xfb);  //myStyle
+const COLORREF kSelectedRowFrameColor      = RGB(0xd1, 0xe3, 0xff);  //myStyle
 const COLORREF kIndicatorBackgroundColor   = RGB(0xe0, 0xe0, 0xe0);  //myStyle
 const COLORREF kIndicatorColor             = RGB(0xaa, 0xaa, 0xaa);  //myStyle
-const COLORREF kFooterTopColor             = RGB(0xfc, 0xfc, 0xfc);  //myStyle
+const COLORREF kFooterTopColor             = RGB(0xfb, 0xfb, 0xfb);  //myStyle
 const COLORREF kFooterBottomColor          = RGB(0xf0, 0xf0, 0xf0);  //myStyle
 
 // ------------------------------------------------------------------------
@@ -466,73 +466,76 @@ void CandidateWindow::UpdateLayout(const commands::Candidates &candidates) {
 
   if (candidates_->has_footer()) {
     Size footer_size(0, 0);
+    const bool isIndexVisible = candidates_->footer().index_visible();
 
-    // Calculate the size to display a label string.
-    if (candidates_->footer().has_label()) {
-      std::wstring footer_label;
-      mozc::Util::Utf8ToWide(candidates_->footer().label(), &footer_label);
-      const Size label_string_size = text_renderer_->MeasureString(
-          TextRenderer::FONTSET_FOOTER_LABEL, L"  " + footer_label + L"  ");  //myStyle
-      footer_size.width += label_string_size.width;
-      footer_size.height =
-          std::max(footer_size.height, label_string_size.height);
-    } else if (candidates_->footer().has_sub_label()) {
-      // Currently the sub label will not be shown unless (main) label is
-      // absent.
-      // TODO(yukawa): Refactor the layout system for the footer.
-      std::wstring footer_sub_label;
-      mozc::Util::Utf8ToWide(candidates_->footer().sub_label(),
-                             &footer_sub_label);
-      const Size label_string_size =
-          text_renderer_->MeasureString(TextRenderer::FONTSET_FOOTER_SUBLABEL,
-                                        L"  " + footer_sub_label + L"  ");   //myStyle
-      footer_size.width += label_string_size.width;
-      footer_size.height =
-          std::max(footer_size.height, label_string_size.height);
-    }
-
-    // Calculate the size to display a index string.
-    if (candidates_->footer().index_visible()) {
-      std::wstring index_guide_string;
-      mozc::Util::Utf8ToWide(GetIndexGuideString(*candidates_),
-                             &index_guide_string);
-      const Size index_guide_size = text_renderer_->MeasureString(
-          TextRenderer::FONTSET_FOOTER_INDEX, index_guide_string);   //myStyle  //spaces are already added
-      footer_size.width += index_guide_size.width;
-      footer_size.height =
-          std::max(footer_size.height, index_guide_size.height);
-    }
-
-    // Calculate the size to display a Footer logo.
-    if (!footer_logo_.IsNull()) {
-      if (candidates_->footer().logo_visible()) {
-        footer_size.width += footer_logo_display_size_.width;
+    if (isIndexVisible) {  //myStyle
+      // Calculate the size to display a label string.
+      if (candidates_->footer().has_label()) {
+        std::wstring footer_label;
+        mozc::Util::Utf8ToWide(candidates_->footer().label(), &footer_label);
+        const Size label_string_size = text_renderer_->MeasureString(
+            TextRenderer::FONTSET_FOOTER_LABEL, L"  " + footer_label + L"  ");  //myStyle
+        footer_size.width += label_string_size.width;
         footer_size.height =
-            std::max(footer_size.height, footer_logo_display_size_.height);
-      } else if (footer_size.height > 0) {
-        // Ensure the footer height is greater than the Footer logo height
-        // even if the Footer logo is absent.  This hack prevents the footer
-        // from changing its height too frequently.
+            std::max(footer_size.height, label_string_size.height);
+      } else if (candidates_->footer().has_sub_label()) {
+        // Currently the sub label will not be shown unless (main) label is
+        // absent.
+        // TODO(yukawa): Refactor the layout system for the footer.
+        std::wstring footer_sub_label;
+        mozc::Util::Utf8ToWide(candidates_->footer().sub_label(),
+                               &footer_sub_label);
+        const Size label_string_size =
+            text_renderer_->MeasureString(TextRenderer::FONTSET_FOOTER_SUBLABEL,
+                                          L"  " + footer_sub_label + L"  ");   //myStyle
+        footer_size.width += label_string_size.width;
         footer_size.height =
-            std::max(footer_size.height, footer_logo_display_size_.height);
+            std::max(footer_size.height, label_string_size.height);
       }
+      
+      // Calculate the size to display a index string.
+      if (candidates_->footer().index_visible()) {
+        std::wstring index_guide_string;
+        mozc::Util::Utf8ToWide(GetIndexGuideString(*candidates_),
+                               &index_guide_string);
+        const Size index_guide_size = text_renderer_->MeasureString(
+            TextRenderer::FONTSET_FOOTER_INDEX, index_guide_string);   //myStyle  //spaces are already added
+        footer_size.width += index_guide_size.width;
+        footer_size.height =
+            std::max(footer_size.height, index_guide_size.height);
+      }
+      
+      // Calculate the size to display a Footer logo.
+      if (!footer_logo_.IsNull()) {
+        if (candidates_->footer().logo_visible()) {
+          footer_size.width += footer_logo_display_size_.width;
+          footer_size.height =
+              std::max(footer_size.height, footer_logo_display_size_.height);
+        } else if (footer_size.height > 0) {
+          // Ensure the footer height is greater than the Footer logo height
+          // even if the Footer logo is absent.  This hack prevents the footer
+          // from changing its height too frequently.
+          footer_size.height =
+              std::max(footer_size.height, footer_logo_display_size_.height);
+        }
+      }
+      
+      // Ensure minimum columns width if candidate list consists of more than
+      // one page.
+      if (candidates_->candidate_size() < candidates_->size()) {
+        // We use FONTSET_CANDIDATE for calculating the minimum width.
+        std::wstring minimum_width_as_wstring;
+        mozc::Util::Utf8ToWide(kMinimumCandidateAndDescriptionWidthAsString,
+                               &minimum_width_as_wstring);
+        const Size minimum_size = text_renderer_->MeasureString(
+            TextRenderer::FONTSET_CANDIDATE, minimum_width_as_wstring.c_str());
+        table_layout_->EnsureColumnsWidth(COLUMN_CANDIDATE, COLUMN_DESCRIPTION,
+                                          minimum_size.width);
+      }
+      
+      // Add separator height
+      footer_size.height += kFooterSeparatorHeight + 2;  //myStyle
     }
-
-    // Ensure minimum columns width if candidate list consists of more than
-    // one page.
-    if (candidates_->candidate_size() < candidates_->size()) {
-      // We use FONTSET_CANDIDATE for calculating the minimum width.
-      std::wstring minimum_width_as_wstring;
-      mozc::Util::Utf8ToWide(kMinimumCandidateAndDescriptionWidthAsString,
-                             &minimum_width_as_wstring);
-      const Size minimum_size = text_renderer_->MeasureString(
-          TextRenderer::FONTSET_CANDIDATE, minimum_width_as_wstring.c_str());
-      table_layout_->EnsureColumnsWidth(COLUMN_CANDIDATE, COLUMN_DESCRIPTION,
-                                        minimum_size.width);
-    }
-
-    // Add separator height
-    footer_size.height += kFooterSeparatorHeight + 2;  //myStyle
 
     table_layout_->EnsureFooterSize(footer_size);
   }
@@ -559,13 +562,10 @@ void CandidateWindow::UpdateLayout(const commands::Candidates &candidates) {
         GetDisplayStringByColumn(candidate, COLUMN_CANDIDATE);
 
     if (!shortcut.empty()) {
-      std::wstring text;
-      text.push_back(L'  ');  // put a space for padding  //myStyle
-      text.append(shortcut);
-      text.push_back(L' ');  // put a space for padding
+      std::wstring text = L'  ' + shortcut + L' ';  //myStyle
       const Size rendering_size =
           text_renderer_->MeasureString(TextRenderer::FONTSET_SHORTCUT, text);
-      table_layout_->EnsureCellSize(COLUMN_SHORTCUT, rendering_size);
+      table_layout_->EnsureCellSize(COLUMN_SHORTCUT, rendering_size + 2);  //myStyle
     }
 
     if (!candidate_string.empty()) {
@@ -713,9 +713,12 @@ void CandidateWindow::DrawShortcutBackground(CDCHandle dc) {
 
 void CandidateWindow::DrawFooter(CDCHandle dc) {
   const Rect &footer_rect = table_layout_->GetFooterRect();
-  if (!candidates_->has_footer() || footer_rect.IsRectEmpty()) {  //myStyle  //probably possible to disable the footer here
+  if (!candidates_->has_footer() || footer_rect.IsRectEmpty()) {
     return;
   }
+  
+  const bool isIndexVisible = candidates_->footer().index_visible();  //myStyle
+  if (!isIndexVisible) return;
 
   const COLORREF kFooterSeparatorColors[kFooterSeparatorHeight] = {kFrameColor};
 
@@ -751,7 +754,7 @@ void CandidateWindow::DrawFooter(CDCHandle dc) {
 
   int left_used = 0;
 
-  if (candidates_->footer().logo_visible() && !footer_logo_.IsNull()) {
+  /*if (candidates_->footer().logo_visible() && !footer_logo_.IsNull()) {  //myStyle
     const int top_offset =
         (footer_content_rect.Height() - footer_logo_display_size_.height) / 2;
     CDC src_dc;
@@ -770,11 +773,11 @@ void CandidateWindow::DrawFooter(CDCHandle dc) {
 
     src_dc.SelectBitmap(old_bitmap);
     left_used = footer_logo_display_size_.width;  //bug fixed
-  }
+  }*/
 
-  bool has_label    = candidates_->footer().has_label();
-  bool has_sublabel = candidates_->footer().has_sub_label();
-  bool has_center   = has_label || has_sublabel;
+  const bool has_label    = candidates_->footer().has_label();
+  const bool has_sublabel = candidates_->footer().has_sub_label();
+  const bool has_center   = has_label || has_sublabel;
   int right_used = 0;
   
   if (candidates_->footer().index_visible()) {
@@ -783,10 +786,16 @@ void CandidateWindow::DrawFooter(CDCHandle dc) {
                            &index_guide_string);
     const Size index_guide_size = text_renderer_->MeasureString(
         TextRenderer::FONTSET_FOOTER_INDEX, index_guide_string);
-    const Rect index_rect(has_center ? (footer_content_rect.Right() - index_guide_size.width) : (footer_content_rect.Left() + left_used + footer_content_rect.Right() - index_guide_size.width) / 2,
-                          footer_content_rect.Top() - 1,  //myStyle
-                          index_guide_size.width,
+    
+    //myStyle
+    const Rect index_rect(has_center ? (footer_content_rect.Right() - index_guide_size.width) : footer_content_rect.Left() + left_used,
+                          footer_content_rect.Top() - 1,
+                          has_center ? index_guide_size.width : footer_content_rect.Right(),
                           footer_content_rect.Height());
+    //const Rect index_rect(has_center ? (footer_content_rect.Right() - index_guide_size.width) : (footer_content_rect.Left() + left_used + footer_content_rect.Right() - index_guide_size.width) / 2,
+    //                      footer_content_rect.Top() - 1
+    //                      index_guide_size.width,
+    //                      footer_content_rect.Height());
     text_renderer_->RenderText(dc, index_guide_string, index_rect,
                                TextRenderer::FONTSET_FOOTER_INDEX);
     if (has_center)
