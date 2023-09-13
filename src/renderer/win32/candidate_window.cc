@@ -552,7 +552,8 @@ void CandidateWindow::UpdateLayout(const commands::Candidates &candidates) {
   bool description_found = false;
 
   // calculate table size.
-  for (size_t i = 0; i < candidates_->candidate_size(); ++i) {
+  const size_t candidates_size = candidates_->candidate_size();
+  for (size_t i = 0; i < candidates_size; ++i) {
     const commands::Candidates::Candidate &candidate =
         candidates_->candidate(i);
     const std::wstring shortcut =
@@ -573,8 +574,10 @@ void CandidateWindow::UpdateLayout(const commands::Candidates &candidates) {
       std::wstring text;
       text.append(candidate_string);
 
-      const Size rendering_size =
+      Size rendering_size =
           text_renderer_->MeasureString(TextRenderer::FONTSET_CANDIDATE, text);
+      if (i == 0)                   rendering_size.height += 1;
+      if (i == candidates_size - 1) rendering_size.height += 2;
       table_layout_->EnsureCellSize(COLUMN_CANDIDATE, rendering_size);
     }
 
@@ -654,7 +657,8 @@ void CandidateWindow::DrawCells(CDCHandle dc) {
     const TextRenderer::FONT_TYPE font_type = kFontTypes[type_index];
 
     std::vector<TextRenderingInfo> display_list;
-    for (size_t i = 0; i < candidates_->candidate_size(); ++i) {
+    const size_t candidates_size = candidates_->candidate_size();
+    for (size_t i = 0; i < candidates_size; ++i) {
       const commands::Candidates::Candidate &candidate =
           candidates_->candidate(i);
       std::wstring display_string =
@@ -662,9 +666,11 @@ void CandidateWindow::DrawCells(CDCHandle dc) {
       const Rect text_rect = table_layout_->GetCellRect(i, column_type);
       
       //myStyle
+      if (i == 0)                    text_rect.DeflateRect(0, 0, 1, 0);
+      if (i == candidates_size - 1)  text_rect.DeflateRect(0, 0, 0, 2);
       if (column_type == TextRenderer::FONTSET_SHORTCUT)
           display_string = L" " + display_string;
-          //text_rect.DeflateRect(8, 0, 0, 0)
+          //text_rect.DeflateRect(8, 0, 0, 0);
       
       display_list.push_back(TextRenderingInfo(display_string, text_rect));
     }
