@@ -70,7 +70,7 @@ CRect ToCRect(const Rect &rect) {
 COLORREF GetTextColor(TextRenderer::FONT_TYPE type) {
   switch (type) {
     case TextRenderer::FONTSET_SHORTCUT:
-      return RGB(0x97, 0x97, 0x97);
+      return RGB(0x9b, 0x9b, 0x9b);
     case TextRenderer::FONTSET_CANDIDATE:
       return RGB(0x00, 0x00, 0x00);
     case TextRenderer::FONTSET_DESCRIPTION:
