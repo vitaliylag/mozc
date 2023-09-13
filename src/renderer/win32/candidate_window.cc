@@ -474,7 +474,7 @@ void CandidateWindow::UpdateLayout(const commands::Candidates &candidates) {
           TextRenderer::FONTSET_FOOTER_LABEL, L" " + footer_label + L" ");
       footer_size.width += label_string_size.width;
       footer_size.height =
-          std::max(footer_size.height, label_string_size.height);
+          std::max(footer_size.height, label_string_size.height) + 2;  //myStyle
     } else if (candidates_->footer().has_sub_label()) {
       // Currently the sub label will not be shown unless (main) label is
       // absent.
@@ -487,7 +487,7 @@ void CandidateWindow::UpdateLayout(const commands::Candidates &candidates) {
                                         L" " + footer_sub_label + L" ");
       footer_size.width += label_string_size.width;
       footer_size.height =
-          std::max(footer_size.height, label_string_size.height);
+          std::max(footer_size.height, label_string_size.height) + 2;  //myStyle
     }
 
     // Calculate the size to display a index string.
@@ -499,7 +499,7 @@ void CandidateWindow::UpdateLayout(const commands::Candidates &candidates) {
           TextRenderer::FONTSET_FOOTER_INDEX, index_guide_string);
       footer_size.width += index_guide_size.width;
       footer_size.height =
-          std::max(footer_size.height, index_guide_size.height);
+          std::max(footer_size.height, index_guide_size.height) + 2;  //myStyle
     }
 
     // Calculate the size to display a Footer logo.
@@ -507,13 +507,13 @@ void CandidateWindow::UpdateLayout(const commands::Candidates &candidates) {
       if (candidates_->footer().logo_visible()) {
         footer_size.width += footer_logo_display_size_.width;
         footer_size.height =
-            std::max(footer_size.height, footer_logo_display_size_.height);
+            std::max(footer_size.height, footer_logo_display_size_.height) + 2;  //myStyle
       } else if (footer_size.height > 0) {
         // Ensure the footer height is greater than the Footer logo height
         // even if the Footer logo is absent.  This hack prevents the footer
         // from changing its height too frequently.
         footer_size.height =
-            std::max(footer_size.height, footer_logo_display_size_.height);
+            std::max(footer_size.height, footer_logo_display_size_.height) + 2;  //myStyle
       }
     }
 
