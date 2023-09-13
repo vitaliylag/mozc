@@ -94,13 +94,13 @@ void RendererStyleHandlerImpl::GetDefaultRendererStyle(RendererStyle *style) {
 
   RendererStyle::TextStyle *shortcutStyle = style->add_text_styles();
   shortcutStyle->set_font_size(14 * scale_factor_y);
-  shortcutStyle->mutable_foreground_color()->set_r(0x77);
-  shortcutStyle->mutable_foreground_color()->set_g(0x77);
-  shortcutStyle->mutable_foreground_color()->set_b(0x77);
-  shortcutStyle->mutable_background_color()->set_r(0xf3);
-  shortcutStyle->mutable_background_color()->set_g(0xf4);
-  shortcutStyle->mutable_background_color()->set_b(0xff);
-  shortcutStyle->set_left_padding(8 * scale_factor_x);
+  shortcutStyle->mutable_foreground_color()->set_r(0x97);  //myStyle
+  shortcutStyle->mutable_foreground_color()->set_g(0x97);  //myStyle
+  shortcutStyle->mutable_foreground_color()->set_b(0x97);  //myStyle
+  shortcutStyle->mutable_background_color()->set_r(0xfc);
+  shortcutStyle->mutable_background_color()->set_g(0xfc);
+  shortcutStyle->mutable_background_color()->set_b(0xfc);
+  shortcutStyle->set_left_padding(16 * scale_factor_x);
   shortcutStyle->set_right_padding(8 * scale_factor_x);
 
   RendererStyle::TextStyle *gap1Style = style->add_text_styles();
@@ -108,12 +108,18 @@ void RendererStyleHandlerImpl::GetDefaultRendererStyle(RendererStyle *style) {
 
   RendererStyle::TextStyle *candidateStyle = style->add_text_styles();
   candidateStyle->set_font_size(14 * scale_factor_y);
+  candidateStyle->mutable_background_color()->set_r(0xfc);  //myStyle
+  candidateStyle->mutable_background_color()->set_g(0xfc);  //myStyle
+  candidateStyle->mutable_background_color()->set_b(0xfc);  //myStyle
 
   RendererStyle::TextStyle *descriptionStyle = style->add_text_styles();
   descriptionStyle->set_font_size(12 * scale_factor_y);
   descriptionStyle->mutable_foreground_color()->set_r(0x88);
   descriptionStyle->mutable_foreground_color()->set_g(0x88);
   descriptionStyle->mutable_foreground_color()->set_b(0x88);
+  descriptionStyle->mutable_background_color()->set_r(0xfc);  //myStyle
+  descriptionStyle->mutable_background_color()->set_g(0xfc);  //myStyle
+  descriptionStyle->mutable_background_color()->set_b(0xfc);  //myStyle
   descriptionStyle->set_right_padding(8 * scale_factor_x);
 
   // We want to ensure that the candidate window is at least wide
@@ -121,48 +127,48 @@ void RendererStyleHandlerImpl::GetDefaultRendererStyle(RendererStyle *style) {
   style->set_column_minimum_width_string("そのほかの文字種  ");
 
   style->mutable_footer_style()->set_font_size(14 * scale_factor_y);
-  style->mutable_footer_style()->set_left_padding(4 * scale_factor_x);
-  style->mutable_footer_style()->set_right_padding(4 * scale_factor_x);
+  style->mutable_footer_style()->set_left_padding(7 * scale_factor_x);  //myStyle
+  style->mutable_footer_style()->set_right_padding(7 * scale_factor_x);  //myStyle
 
   RendererStyle::TextStyle *footer_sub_label_style =
       style->mutable_footer_sub_label_style();
   footer_sub_label_style->set_font_size(10 * scale_factor_y);
-  footer_sub_label_style->mutable_foreground_color()->set_r(167);
-  footer_sub_label_style->mutable_foreground_color()->set_g(167);
-  footer_sub_label_style->mutable_foreground_color()->set_b(167);
-  footer_sub_label_style->set_left_padding(4 * scale_factor_x);
-  footer_sub_label_style->set_right_padding(4 * scale_factor_x);
+  footer_sub_label_style->mutable_foreground_color()->set_r(0x88);  //myStyle
+  footer_sub_label_style->mutable_foreground_color()->set_g(0x88);  //myStyle
+  footer_sub_label_style->mutable_foreground_color()->set_b(0x88);  //myStyle
+  footer_sub_label_style->set_left_padding(7 * scale_factor_x);     //myStyle
+  footer_sub_label_style->set_right_padding(7 * scale_factor_x);    //myStyle
 
   RendererStyle::RGBAColor *color = style->add_footer_border_colors();
-  color->set_r(96);
-  color->set_r(96);
-  color->set_r(96);
+  color->set_r(0x96);  //myStyle
+  color->set_g(0x96);  //myStyle
+  color->set_b(0x96);  //myStyle
 
-  style->mutable_footer_top_color()->set_r(0xff);
-  style->mutable_footer_top_color()->set_g(0xff);
-  style->mutable_footer_top_color()->set_b(0xff);
+  style->mutable_footer_top_color()->set_r(0xfc);  //myStyle
+  style->mutable_footer_top_color()->set_g(0xfc);  //myStyle
+  style->mutable_footer_top_color()->set_b(0xfc);  //myStyle
 
-  style->mutable_footer_bottom_color()->set_r(0xee);
-  style->mutable_footer_bottom_color()->set_g(0xee);
-  style->mutable_footer_bottom_color()->set_b(0xee);
+  style->mutable_footer_bottom_color()->set_r(0xf2);  //myStyle
+  style->mutable_footer_bottom_color()->set_g(0xf2);  //myStyle
+  style->mutable_footer_bottom_color()->set_b(0xf2);  //myStyle
 
   style->set_logo_file_name("candidate_window_logo.tiff");
 
-  style->mutable_focused_background_color()->set_r(0xd1);
-  style->mutable_focused_background_color()->set_g(0xea);
-  style->mutable_focused_background_color()->set_b(0xff);
+  style->mutable_focused_background_color()->set_r(0xd1);  //myStyle
+  style->mutable_focused_background_color()->set_g(0xea);  //myStyle
+  style->mutable_focused_background_color()->set_b(0xff);  //myStyle
 
-  style->mutable_focused_border_color()->set_r(0x7f);
-  style->mutable_focused_border_color()->set_g(0xac);
-  style->mutable_focused_border_color()->set_b(0xdd);
+  style->mutable_focused_border_color()->set_r(0xd1);  //myStyle
+  style->mutable_focused_border_color()->set_g(0xea);  //myStyle
+  style->mutable_focused_border_color()->set_b(0xff);  //myStyle
 
-  style->mutable_scrollbar_background_color()->set_r(0xe0);
-  style->mutable_scrollbar_background_color()->set_g(0xe0);
-  style->mutable_scrollbar_background_color()->set_b(0xe0);
+  style->mutable_scrollbar_background_color()->set_r(0xe0);  //myStyle
+  style->mutable_scrollbar_background_color()->set_g(0xe0);  //myStyle
+  style->mutable_scrollbar_background_color()->set_b(0xe0);  //myStyle
 
-  style->mutable_scrollbar_indicator_color()->set_r(0x75);
-  style->mutable_scrollbar_indicator_color()->set_g(0x90);
-  style->mutable_scrollbar_indicator_color()->set_b(0xb8);
+  style->mutable_scrollbar_indicator_color()->set_r(0xaa);  //myStyle
+  style->mutable_scrollbar_indicator_color()->set_g(0xaa);  //myStyle
+  style->mutable_scrollbar_indicator_color()->set_b(0xaa);  //myStyle
 
   RendererStyle::InfolistStyle *infostyle = style->mutable_infolist_style();
   infostyle->set_caption_string("用例");
@@ -187,9 +193,9 @@ void RendererStyleHandlerImpl::GetDefaultRendererStyle(RendererStyle *style) {
   infostyle->mutable_focused_background_color()->set_r(0xd1);
   infostyle->mutable_focused_background_color()->set_g(0xea);
   infostyle->mutable_focused_background_color()->set_b(0xff);
-  infostyle->mutable_focused_border_color()->set_r(0x7f);
-  infostyle->mutable_focused_border_color()->set_g(0xac);
-  infostyle->mutable_focused_border_color()->set_b(0xdd);
+  infostyle->mutable_focused_border_color()->set_r(0xd1);
+  infostyle->mutable_focused_border_color()->set_g(0xea);
+  infostyle->mutable_focused_border_color()->set_b(0xff);
 }
 }  // namespace
 
