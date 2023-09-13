@@ -97,9 +97,9 @@ void RendererStyleHandlerImpl::GetDefaultRendererStyle(RendererStyle *style) {
   shortcutStyle->mutable_foreground_color()->set_r(0x97);  //myStyle
   shortcutStyle->mutable_foreground_color()->set_g(0x97);  //myStyle
   shortcutStyle->mutable_foreground_color()->set_b(0x97);  //myStyle
-  shortcutStyle->mutable_background_color()->set_r(0xfc);
-  shortcutStyle->mutable_background_color()->set_g(0xfc);
-  shortcutStyle->mutable_background_color()->set_b(0xfc);
+  shortcutStyle->mutable_background_color()->set_r(0xfb);
+  shortcutStyle->mutable_background_color()->set_g(0xfb);
+  shortcutStyle->mutable_background_color()->set_b(0xfb);
   shortcutStyle->set_left_padding(16 * scale_factor_x);
   shortcutStyle->set_right_padding(8 * scale_factor_x);
 
@@ -108,18 +108,18 @@ void RendererStyleHandlerImpl::GetDefaultRendererStyle(RendererStyle *style) {
 
   RendererStyle::TextStyle *candidateStyle = style->add_text_styles();
   candidateStyle->set_font_size(14 * scale_factor_y);
-  candidateStyle->mutable_background_color()->set_r(0xfc);  //myStyle
-  candidateStyle->mutable_background_color()->set_g(0xfc);  //myStyle
-  candidateStyle->mutable_background_color()->set_b(0xfc);  //myStyle
+  candidateStyle->mutable_background_color()->set_r(0xfb);  //myStyle
+  candidateStyle->mutable_background_color()->set_g(0xfb);  //myStyle
+  candidateStyle->mutable_background_color()->set_b(0xfb);  //myStyle
 
   RendererStyle::TextStyle *descriptionStyle = style->add_text_styles();
   descriptionStyle->set_font_size(12 * scale_factor_y);
   descriptionStyle->mutable_foreground_color()->set_r(0x88);
   descriptionStyle->mutable_foreground_color()->set_g(0x88);
   descriptionStyle->mutable_foreground_color()->set_b(0x88);
-  descriptionStyle->mutable_background_color()->set_r(0xfc);  //myStyle
-  descriptionStyle->mutable_background_color()->set_g(0xfc);  //myStyle
-  descriptionStyle->mutable_background_color()->set_b(0xfc);  //myStyle
+  descriptionStyle->mutable_background_color()->set_r(0xfb);  //myStyle
+  descriptionStyle->mutable_background_color()->set_g(0xfb);  //myStyle
+  descriptionStyle->mutable_background_color()->set_b(0xfb);  //myStyle
   descriptionStyle->set_right_padding(8 * scale_factor_x);
 
   // We want to ensure that the candidate window is at least wide
@@ -144,9 +144,9 @@ void RendererStyleHandlerImpl::GetDefaultRendererStyle(RendererStyle *style) {
   color->set_g(0x96);  //myStyle
   color->set_b(0x96);  //myStyle
 
-  style->mutable_footer_top_color()->set_r(0xfc);  //myStyle
-  style->mutable_footer_top_color()->set_g(0xfc);  //myStyle
-  style->mutable_footer_top_color()->set_b(0xfc);  //myStyle
+  style->mutable_footer_top_color()->set_r(0xfb);  //myStyle
+  style->mutable_footer_top_color()->set_g(0xfb);  //myStyle
+  style->mutable_footer_top_color()->set_b(0xfb);  //myStyle
 
   style->mutable_footer_bottom_color()->set_r(0xf0);  //myStyle
   style->mutable_footer_bottom_color()->set_g(0xf0);  //myStyle
@@ -155,11 +155,11 @@ void RendererStyleHandlerImpl::GetDefaultRendererStyle(RendererStyle *style) {
   style->set_logo_file_name("candidate_window_logo.tiff");
 
   style->mutable_focused_background_color()->set_r(0xd1);  //myStyle
-  style->mutable_focused_background_color()->set_g(0xea);  //myStyle
+  style->mutable_focused_background_color()->set_g(0xe3);  //myStyle
   style->mutable_focused_background_color()->set_b(0xff);  //myStyle
 
   style->mutable_focused_border_color()->set_r(0xd1);  //myStyle
-  style->mutable_focused_border_color()->set_g(0xea);  //myStyle
+  style->mutable_focused_border_color()->set_g(0xe3);  //myStyle
   style->mutable_focused_border_color()->set_b(0xff);  //myStyle
 
   style->mutable_scrollbar_background_color()->set_r(0xe0);  //myStyle
@@ -191,10 +191,10 @@ void RendererStyleHandlerImpl::GetDefaultRendererStyle(RendererStyle *style) {
   infostyle->mutable_border_color()->set_g(0x96);
   infostyle->mutable_border_color()->set_b(0x96);
   infostyle->mutable_focused_background_color()->set_r(0xd1);
-  infostyle->mutable_focused_background_color()->set_g(0xea);
+  infostyle->mutable_focused_background_color()->set_g(0xe3);
   infostyle->mutable_focused_background_color()->set_b(0xff);
   infostyle->mutable_focused_border_color()->set_r(0xd1);
-  infostyle->mutable_focused_border_color()->set_g(0xea);
+  infostyle->mutable_focused_border_color()->set_g(0xe3);
   infostyle->mutable_focused_border_color()->set_b(0xff);
 }
 }  // namespace
