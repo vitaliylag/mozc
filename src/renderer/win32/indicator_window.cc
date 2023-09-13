@@ -256,6 +256,7 @@ class IndicatorWindow::WindowImpl
     BalloonImage::BalloonImageInfo info;
     CLogFont logfont;
     logfont.SetMessageBoxFont();
+    logfont.lfHeight *= 1.5;  //mySize
     Util::WideToUtf8(logfont.lfFaceName, &info.label_font);
 
     info.frame_color = RGBColor(1, 122, 204);
