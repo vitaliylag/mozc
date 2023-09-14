@@ -192,6 +192,8 @@ class TableLayout : public TableLayoutInterface {
   int row_rect_padding_pixels_;
   int row_height_;  // this value includes (row_rect_padding * 2)
   int vscroll_width_pixels_;
+  int padding_top;
+  int padding_bottom;
 
   bool layout_frozen_;
 };
