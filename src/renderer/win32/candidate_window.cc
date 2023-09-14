@@ -567,7 +567,7 @@ void CandidateWindow::UpdateLayout(const commands::Candidates &candidates) {
       std::wstring text = L'  ' + shortcut + L' ';  //myStyle
       const Size rendering_size =
           text_renderer_->MeasureString(TextRenderer::FONTSET_SHORTCUT, text);
-      table_layout_->EnsureCellSize(COLUMN_SHORTCUT, Size(rendering_size.width + 2, rendering_size.height));  //myStyle
+      table_layout_->EnsureCellSize(COLUMN_SHORTCUT, Size(rendering_size.width, rendering_size.height));  //myStyle  //rendering_size.width + 2
     }
 
     if (!candidate_string.empty()) {
@@ -576,8 +576,8 @@ void CandidateWindow::UpdateLayout(const commands::Candidates &candidates) {
 
       Size rendering_size =
           text_renderer_->MeasureString(TextRenderer::FONTSET_CANDIDATE, text);
-      if (i == 0)                   rendering_size.height += 1;
-      if (i == candidates_size - 1) rendering_size.height += 2;
+      //if (i == 0)                   rendering_size.height += 1;
+      //if (i == candidates_size - 1) rendering_size.height += 2;
       table_layout_->EnsureCellSize(COLUMN_CANDIDATE, rendering_size);
     }
 
@@ -720,13 +720,15 @@ void CandidateWindow::DrawShortcutBackground(CDCHandle dc) {
 
 void CandidateWindow::DrawFooter(CDCHandle dc) {
   const Rect &footer_rect = table_layout_->GetFooterRect();
-  if (!candidates_->has_footer() || footer_rect.IsRectEmpty()) {
-    return;
-  }
+  if (!candidates_->has_footer() || footer_rect.IsRectEmpty()) return;
   
   const bool isIndexVisible = candidates_->footer().index_visible();  //myStyle
   if (!isIndexVisible) return;
 
+  //double scale_factor_x = 1.0;
+  //double scale_factor_y = 1.0;
+  //RendererStyleHandler::GetDPIScalingFactor(&scale_factor_x, &scale_factor_y);
+  
   const COLORREF kFooterSeparatorColors[kFooterSeparatorHeight] = {kFrameColor};
 
   // DC pen is available in Windows 2000 and later.
@@ -791,11 +793,14 @@ void CandidateWindow::DrawFooter(CDCHandle dc) {
     std::wstring index_guide_string;
     mozc::Util::Utf8ToWide(GetIndexGuideString(*candidates_),
                            &index_guide_string);
+    
+    index_guide_string = has_center ? wstring_trimStart(index_guide_string) : wstring_trim(index_guide_string);
+    
     const Size index_guide_size = text_renderer_->MeasureString(
         TextRenderer::FONTSET_FOOTER_INDEX, index_guide_string);
     
     //myStyle
-    const Rect index_rect(has_center ? (footer_content_rect.Right() - index_guide_size.width) : footer_content_rect.Left() + left_used,
+    const Rect index_rect(has_center ? (footer_content_rect.Right() - index_guide_size.width) : footer_content_rect.Left() + left_used,  // - static_cast<int>(scale_factor_x * 7)
                           footer_content_rect.Top() - 1,
                           has_center ? index_guide_size.width : footer_content_rect.Right(),
                           footer_content_rect.Height());
@@ -889,3 +894,23 @@ void CandidateWindow::set_mouse_moving(bool moving) { mouse_moving_ = moving; }
 }  // namespace win32
 }  // namespace renderer
 }  // namespace mozc
+
+
+
+std::wstring wstring_trimStart(const std::wstring& s) {
+    size_t actualStartX = s.find_first_not_of(L' ');
+    return actualStartX == std::wstring::npos ? L"" : s.substr(actualStartX);
+}
+
+std::wstring wstring_trimEnd(const std::wstring& s) {
+    size_t actualEndX = s.find_last_not_of(L' ');
+    return actualEndX == std::wstring::npos ? L"" : s.substr(0, actualEndX + 1);
+}
+
+std::wstring wstring_trim(const std::wstring& s) {
+    size_t actualStartX = s.find_first_not_of(L' ');
+    if (actualStartX == std::wstring::npos) return L"";
+    
+    size_t actualEndX = s.find_last_not_of(L' ');
+    return s.substr(actualEndX, (last - actualEndX + 1));
+}
