@@ -663,11 +663,11 @@ void CandidateWindow::DrawCells(CDCHandle dc) {
           candidates_->candidate(i);
       std::wstring display_string =
           GetDisplayStringByColumn(candidate, column_type);
-      const Rect text_rect = table_layout_->GetCellRect(i, column_type);
+      Rect text_rect = table_layout_->GetCellRect(i, column_type);
       
       //myStyle
-      if (i == 0)                    text_rect.DeflateRect(0, 0, 1, 0);
-      if (i == candidates_size - 1)  text_rect.DeflateRect(0, 0, 0, 2);
+      if (i == 0)                    text_rect.DeflateRect(0, 1, 0, 0);  // (dx, dy, dw, dh)
+      if (i == candidates_size - 1)  text_rect.DeflateRect(0, 0, 0, 2);  // (dx, dy, dw, dh)
       if (column_type == TextRenderer::FONTSET_SHORTCUT)
           display_string = L" " + display_string;
           //text_rect.DeflateRect(8, 0, 0, 0);
