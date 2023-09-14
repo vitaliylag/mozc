@@ -70,7 +70,7 @@ CRect ToCRect(const Rect &rect) {
 COLORREF GetTextColor(TextRenderer::FONT_TYPE type) {
   switch (type) {
     case TextRenderer::FONTSET_SHORTCUT:
-      return RGB(0x9b, 0x9b, 0x9b);
+      return RGB(0x9d, 0x9d, 0x9d);
     case TextRenderer::FONTSET_CANDIDATE:
       return RGB(0x00, 0x00, 0x00);
     case TextRenderer::FONTSET_DESCRIPTION:
@@ -116,7 +116,7 @@ CLogFont GetLogFont(TextRenderer::FONT_TYPE type) {
     case TextRenderer::FONTSET_SHORTCUT: {
       CLogFont font;
       font.SetMessageBoxFont();
-      font.MakeLarger(3);
+      font.MakeLarger(3);                     //mySize
       font.lfHeight = font.lfHeight * 3 / 2;  //mySize
       font.lfWeight = FW_NORMAL;              //myStyle
       return font;
