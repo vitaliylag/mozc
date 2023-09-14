@@ -94,6 +94,31 @@ const COLORREF kIndicatorColor             = RGB(0xaa, 0xaa, 0xaa);  //myStyle
 const COLORREF kFooterTopColor             = RGB(0xfb, 0xfb, 0xfb);  //myStyle
 const COLORREF kFooterBottomColor          = RGB(0xf0, 0xf0, 0xf0);  //myStyle
 
+
+
+// ------------------------------------------------------------------------
+// Functions
+// ------------------------------------------------------------------------
+std::wstring wstring_trimStart(const std::wstring& s) {
+    size_t actualStartX = s.find_first_not_of(L' ');
+    return actualStartX == std::wstring::npos ? L"" : s.substr(actualStartX);
+}
+
+std::wstring wstring_trimEnd(const std::wstring& s) {
+    size_t actualEndX = s.find_last_not_of(L' ');
+    return actualEndX == std::wstring::npos ? L"" : s.substr(0, actualEndX + 1);
+}
+
+std::wstring wstring_trim(const std::wstring& s) {
+    size_t actualStartX = s.find_first_not_of(L' ');
+    if (actualStartX == std::wstring::npos) return L"";
+    
+    size_t actualEndX = s.find_last_not_of(L' ');
+    return s.substr(actualEndX, (last - actualEndX + 1));
+}
+
+
+
 // ------------------------------------------------------------------------
 // Utility functions
 // ------------------------------------------------------------------------
@@ -894,23 +919,3 @@ void CandidateWindow::set_mouse_moving(bool moving) { mouse_moving_ = moving; }
 }  // namespace win32
 }  // namespace renderer
 }  // namespace mozc
-
-
-
-std::wstring wstring_trimStart(const std::wstring& s) {
-    size_t actualStartX = s.find_first_not_of(L' ');
-    return actualStartX == std::wstring::npos ? L"" : s.substr(actualStartX);
-}
-
-std::wstring wstring_trimEnd(const std::wstring& s) {
-    size_t actualEndX = s.find_last_not_of(L' ');
-    return actualEndX == std::wstring::npos ? L"" : s.substr(0, actualEndX + 1);
-}
-
-std::wstring wstring_trim(const std::wstring& s) {
-    size_t actualStartX = s.find_first_not_of(L' ');
-    if (actualStartX == std::wstring::npos) return L"";
-    
-    size_t actualEndX = s.find_last_not_of(L' ');
-    return s.substr(actualEndX, (last - actualEndX + 1));
-}
