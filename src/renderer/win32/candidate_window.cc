@@ -114,7 +114,7 @@ std::wstring wstring_trim(const std::wstring& s) {
     if (actualStartX == std::wstring::npos) return L"";
     
     size_t actualEndX = s.find_last_not_of(L' ');
-    return s.substr(actualEndX, (last - actualEndX + 1));
+    return s.substr(actualEndX, (actualEndX - actualEndX + 1));
 }
 
 
