@@ -120,6 +120,7 @@ class TableLayout : public TableLayoutInterface {
   // Set layout element.
   void SetVScrollBar(int width_in_pixels) override;
   void SetWindowBorder(int width_in_pixels) override;
+  void SetVerPad(int padding_top, int padding_bottom) override;
   void SetRowRectPadding(int width_pixels) override;
 
   // Ensure the cell size is same to or larger than the specified size.
