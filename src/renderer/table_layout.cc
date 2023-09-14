@@ -57,6 +57,8 @@ TableLayout::TableLayout()
       row_rect_padding_pixels_(0),
       row_height_(1),
       vscroll_width_pixels_(0),
+      padding_top(1),
+      padding_bottom(2),
       layout_frozen_(false) {}
 
 void TableLayout::Initialize(int num_rows, int num_columns) {
@@ -70,6 +72,8 @@ void TableLayout::Initialize(int num_rows, int num_columns) {
   row_rect_padding_pixels_ = 0;
   row_height_ = 0;
   vscroll_width_pixels_ = 0;
+  padding_top    = 1;
+  padding_bottom = 2;
 
   column_width_list_.clear();
   column_width_list_.resize(num_columns);
@@ -195,7 +199,8 @@ void TableLayout::FreezeLayout() {
   const int height = window_border_pixels_ * 2 +    // border top and bottom
                      minimum_header_size_.height +  // header height
                      all_cell_height +              // sum of all cell
-                     minimum_footer_size_.height;   // footer height
+                     minimum_footer_size_.height +  // footer height
+                     padding_top + padding_bottom;  // paddings for first and last row
 
   total_size_ = Size(width, height);
   layout_frozen_ = true;
@@ -226,11 +231,16 @@ Rect TableLayout::GetCellRect(int row, int column) const {
 
   const int top = window_border_pixels_ +        // border top
                   minimum_header_size_.height +  // header height
-                  height_of_upper_cells;         // upper cells
+                  height_of_upper_cells +        // upper cells
+                  (row > 0 ? padding_top : 0);   // padding for first row
 
   const int width = column_width_list_[column];
+  
+  const int height = row_height_ +
+                     (row == 0 ? padding_top : 0) +
+                     (row == number_of_rows_ - 1 ? padding_bottom : 0);
 
-  Rect rect(left, top, width, row_height_);
+  Rect rect(left, top, width, height);
 
   // deflate top and bottom since row_height_ includes the padding
   rect.DeflateRect(0, row_rect_padding_pixels_, 0, row_rect_padding_pixels_);
@@ -268,7 +278,8 @@ Rect TableLayout::GetFooterRect() const {
 
   const int top = total_size_.height -           // total width
                   minimum_footer_size_.height -  // footer height
-                  window_border_pixels_;         // border bottom
+                  window_border_pixels_ +        // border bottom
+                  padding_top + padding_bottom;  // paddings for first and last row
 
   const int width = total_size_.width -         // total width
                     window_border_pixels_ * 2;  // border left and right
@@ -292,7 +303,8 @@ Rect TableLayout::GetVScrollBarRect() const {
   const int height = total_size_.height -           // total height
                      window_border_pixels_ * 2 -    // border top and bottom
                      minimum_header_size_.height -  // header height
-                     minimum_footer_size_.height;   // footer height
+                     minimum_footer_size_.height +  // footer height
+                     padding_top + padding_bottom;  // paddings for first and last row
 
   return Rect(left, top, vscroll_width_pixels_, height);
 }
@@ -330,13 +342,18 @@ Rect TableLayout::GetRowRect(int row) const {
 
   const int top = window_border_pixels_ +        // border top
                   minimum_header_size_.height +  // header height
-                  row_height_ * row;             // upper cells
+                  row_height_ * row +            // upper cells
+                  (row > 0 ? padding_top : 0);   // padding for first row
 
   const int width = total_size_.width -          // total width
                     window_border_pixels_ * 2 -  // border left and right
                     vscroll_width_pixels_;       // vscroll width
 
-  return Rect(window_border_pixels_, top, width, row_height_);
+  const int height = row_height_ +
+                     (row == 0 ? padding_top : 0) +
+                     (row == number_of_rows_ - 1 ? padding_bottom : 0);
+
+  return Rect(window_border_pixels_, top, width, height);
 }
 
 Rect TableLayout::GetColumnRect(int column) const {
@@ -358,7 +375,8 @@ Rect TableLayout::GetColumnRect(int column) const {
 
   const int width = column_width_list_[column];
 
-  const int height = row_height_ * number_of_rows_;
+  const int height = row_height_ * number_of_rows_ +
+                     padding_top + padding_bottom;
 
   return Rect(left, top, width, height);
 }
