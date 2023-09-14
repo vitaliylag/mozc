@@ -70,8 +70,7 @@ TEST(TableLayoutTest, AllElement) {
   layout.SetVScrollBar(kVSCrollBarWidth);
   layout.SetRowRectPadding(kRowRectPadding);
   layout.SetWindowBorder(kWindowBorder);
-  layout.padding_top = 0;
-  layout.padding_bottom = 0;
+  layout.SetVerPad(0, 0);
 
   const Size kGap1(5, 0);
 
@@ -115,8 +114,7 @@ TEST(TableLayoutTest, AllElementWithMinimumFooterWidth) {
   layout.SetVScrollBar(kVSCrollBarWidth);
   layout.SetRowRectPadding(kRowRectPadding);
   layout.SetWindowBorder(kWindowBorder);
-  layout.padding_top = 0;
-  layout.padding_bottom = 0;
+  layout.SetVerPad(0, 0);
 
   const Size kGap1(5, 0);
 
@@ -151,8 +149,7 @@ TEST(TableLayoutTest, AllElementWithMinimumFooterWidth) {
 TEST(TableLayoutTest, EnsureCellsWidth) {
   TableLayout layout;
   layout.Initialize(1, 4);
-  layout.padding_top = 0;
-  layout.padding_bottom = 0;
+  layout.SetVerPad(0, 0);
   for (size_t i = 0; i < 4; ++i) {
     layout.EnsureCellSize(i, Size(10, 10));
   }
@@ -169,8 +166,7 @@ TEST(TableLayoutTest, EnsureCellsWidth) {
 TEST(TableLayoutTest, EnsureCellsWidthCallTwice) {
   TableLayout layout;
   layout.Initialize(1, 4);
-  layout.padding_top = 0;
-  layout.padding_bottom = 0;
+  layout.SetVerPad(0, 0);
   for (size_t i = 0; i < 4; ++i) {
     layout.EnsureCellSize(i, Size(10, 10));
   }
@@ -189,8 +185,7 @@ TEST(TableLayoutTest, VScrollIndicatorPositions) {
   TableLayout layout;
   // Set the size to 100.
   layout.Initialize(1, 1);
-  layout.padding_top = 0;
-  layout.padding_bottom = 0;
+  layout.SetVerPad(0, 0);
   layout.EnsureCellSize(0, Size(1, 100));
   layout.SetVScrollBar(10);
   layout.FreezeLayout();
@@ -221,8 +216,7 @@ TEST(TableLayoutTest, VScrollIndicatorPositions) {
 TEST(TableLayoutTest, VScrollVerySmallIndicator) {
   TableLayout layout;
   layout.Initialize(1, 1);
-  layout.padding_top = 0;
-  layout.padding_bottom = 0;
+  layout.SetVerPad(0, 0);
   layout.EnsureCellSize(0, Size(1, 100));
   layout.SetVScrollBar(10);
   layout.FreezeLayout();
@@ -238,8 +232,7 @@ TEST(TableLayoutTest, VScrollVerySmallIndicator) {
 TEST(TableLayoutTest, LayoutFreeze) {
   TableLayout layout;
   layout.Initialize(1, 1);
-  layout.padding_top = 0;
-  layout.padding_bottom = 0;
+  layout.SetVerPad(0, 0);
 
   EXPECT_FALSE(layout.IsLayoutFrozen());
 
@@ -248,8 +241,7 @@ TEST(TableLayoutTest, LayoutFreeze) {
   EXPECT_TRUE(layout.IsLayoutFrozen());
 
   layout.Initialize(1, 1);
-  layout.padding_top = 0;
-  layout.padding_bottom = 0;
+  layout.SetVerPad(0, 0);
 
   EXPECT_FALSE(layout.IsLayoutFrozen());
 }
