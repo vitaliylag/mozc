@@ -87,7 +87,7 @@ const COLORREF kFrameColor                 = RGB(0x96, 0x96, 0x96);
 const COLORREF kShortcutBackgroundColor    = RGB(0xfb, 0xfb, 0xfb);  //myStyle
 const COLORREF kSelectedRowBackgroundColor = RGB(0xd1, 0xe3, 0xff);  //myStyle
 const COLORREF kDefaultBackgroundColor     = RGB(0xfb, 0xfb, 0xfb);  //myStyle
-const COLORREF kDefaultBackgroundColor_sug = RGB(0xf8, 0xf8, 0xf8);  //myStyle
+const COLORREF kDefaultBackgroundColor_sug = RGB(0xf9, 0xf9, 0xf9);  //myStyle
 const COLORREF kSelectedRowFrameColor      = RGB(0xd1, 0xe3, 0xff);  //myStyle
 const COLORREF kIndicatorBackgroundColor   = RGB(0xe0, 0xe0, 0xe0);  //myStyle
 const COLORREF kIndicatorColor             = RGB(0xaa, 0xaa, 0xaa);  //myStyle
@@ -751,9 +751,9 @@ void CandidateWindow::DrawFooter(CDCHandle dc) {
   const bool isIndexVisible = candidates_->footer().index_visible();  //myStyle
   if (!isIndexVisible) return;
 
-  //double scale_factor_x = 1.0;
-  //double scale_factor_y = 1.0;
-  //RendererStyleHandler::GetDPIScalingFactor(&scale_factor_x, &scale_factor_y);
+  double scale_factor_x = 1.0;
+  double scale_factor_y = 1.0;
+  RendererStyleHandler::GetDPIScalingFactor(&scale_factor_x, &scale_factor_y);
   
   const COLORREF kFooterSeparatorColors[kFooterSeparatorHeight] = {kFrameColor};
 
@@ -826,7 +826,7 @@ void CandidateWindow::DrawFooter(CDCHandle dc) {
         TextRenderer::FONTSET_FOOTER_INDEX, index_guide_string);
     
     //myStyle
-    const Rect index_rect(has_center ? (footer_content_rect.Right() - index_guide_size.width) : footer_content_rect.Left() + left_used,  // - static_cast<int>(scale_factor_x * 7)
+    const Rect index_rect(has_center ? (footer_content_rect.Right() - index_guide_size.width - 1) : footer_content_rect.Left() + left_used,  // - static_cast<int>(scale_factor_x * 7)
                           footer_content_rect.Top() - 1,
                           has_center ? index_guide_size.width : footer_content_rect.Right(),
                           footer_content_rect.Height());
@@ -837,7 +837,7 @@ void CandidateWindow::DrawFooter(CDCHandle dc) {
     text_renderer_->RenderText(dc, index_guide_string, index_rect,
                                TextRenderer::FONTSET_FOOTER_INDEX);
     if (has_center)
-      right_used = index_guide_size.width - 2;
+      right_used = index_guide_size.width - static_cast<int>(scale_factor_x * 4.0);  //myStyle
   }
 
   if (has_label) {
