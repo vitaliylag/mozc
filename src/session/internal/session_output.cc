@@ -380,13 +380,13 @@ bool SessionOutput::FillFooter(const commands::Category category,
           // TODO(noriyukit): Change the message depending on user's keymap.
 #if defined(__APPLE__)
           constexpr absl::string_view kDeleteInstruction =
-              "control+fn+deleteで履歴から削除";
+              "control+fn+delete：削除";
 #elif defined(OS_CHROMEOS)
           constexpr absl::string_view kDeleteInstruction =
-              "ctrl+alt+backspaceで履歴から削除";
+              "ctrl+alt+backspace：削除";
 #else   // !__APPLE__ && !OS_CHROMEOS
           constexpr absl::string_view kDeleteInstruction =
-              "Ctrl+Delで履歴から削除";
+              "Ctrl+Del：削除";
 #endif  // __APPLE__ || OS_CHROMEOS
           footer->set_label(kDeleteInstruction);
           show_build_number = false;
