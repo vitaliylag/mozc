@@ -114,7 +114,7 @@ std::wstring wstring_trim(const std::wstring& s) {
     if (actualStartX == std::wstring::npos) return L"";
     
     size_t actualEndX = s.find_last_not_of(L' ');
-    return s.substr(actualEndX, (actualEndX - actualEndX + 1));
+    return s.substr(actualStartX, (actualEndX - actualStartX + 1));
 }
 
 
@@ -691,8 +691,9 @@ void CandidateWindow::DrawCells(CDCHandle dc) {
       Rect text_rect = table_layout_->GetCellRect(i, column_type);
       
       //myStyle
-      if (i == 0)                    text_rect.DeflateRect(0, 1, 0, 0);  // (dx, dy, dw, dh)
-      if (i == candidates_size - 1)  text_rect.DeflateRect(0, 0, 0, 2);  // (dx, dy, dw, dh)
+      text_rect.origin.y--;
+      if (i == 0)                    text_rect.DeflateRect(0, table_layout_->padding_top(), 0, 0);     // (left, top, right, bottom)
+      if (i == candidates_size - 1)  text_rect.DeflateRect(0, 0, 0, table_layout_->padding_bottom());  // (left, top, right, bottom)
       if (column_type == TextRenderer::FONTSET_SHORTCUT)
           display_string = L" " + display_string;
           //text_rect.DeflateRect(8, 0, 0, 0);
@@ -836,7 +837,7 @@ void CandidateWindow::DrawFooter(CDCHandle dc) {
     text_renderer_->RenderText(dc, index_guide_string, index_rect,
                                TextRenderer::FONTSET_FOOTER_INDEX);
     if (has_center)
-      right_used = index_guide_size.width;
+      right_used = index_guide_size.width - 2;
   }
 
   if (has_label) {
