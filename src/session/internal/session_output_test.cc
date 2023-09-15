@@ -700,11 +700,11 @@ TEST(SessionOutputTest, FillFooter) {
       ASSERT_TRUE(candidates.has_footer());
       ASSERT_TRUE(candidates.footer().has_label());
 #if defined(__APPLE__)
-      constexpr char kDeleteInstruction[] = "control+fn+deleteで履歴から削除";
+      constexpr char kDeleteInstruction[] = "control+fn+delete：削除";
 #elif defined(OS_CHROMEOS)
-      constexpr char kDeleteInstruction[] = "ctrl+alt+backspaceで履歴から削除";
+      constexpr char kDeleteInstruction[] = "ctrl+alt+backspace：削除";
 #else   // !__APPLE__ && !OS_CHROMEOS
-      constexpr char kDeleteInstruction[] = "Ctrl+Delで履歴から削除";
+      constexpr char kDeleteInstruction[] = "Ctrl+Del：削除";
 #endif  // __APPLE__ || OS_CHROMEOS
       EXPECT_EQ(candidates.footer().label(), kDeleteInstruction);
 #if defined(CHANNEL_DEV) && defined(GOOGLE_JAPANESE_INPUT_BUILD)
