@@ -173,8 +173,10 @@ class TableLayout : public TableLayoutInterface {
   Rect GetColumnRect(int column) const override;
 
   // Parameter getters
-  int number_of_rows() const override;
+  int number_of_rows()    const override;
   int number_of_columns() const override;
+  int padding_top()       const;
+  int padding_bottom()    const;
 
  private:
   std::vector<int> column_width_list_;
@@ -195,6 +197,7 @@ class TableLayout : public TableLayoutInterface {
   int vscroll_width_pixels_;
   int padding_top_;
   int padding_bottom_;
+  int verPad_;
 
   bool layout_frozen_;
 };
