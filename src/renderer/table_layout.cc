@@ -57,8 +57,9 @@ TableLayout::TableLayout()
       row_rect_padding_pixels_(0),
       row_height_(1),
       vscroll_width_pixels_(0),
-      padding_top_(1),
-      padding_bottom_(2),
+      padding_top_(2),
+      padding_bottom_(1),
+      verPad_(3),
       layout_frozen_(false) {}
 
 void TableLayout::Initialize(int num_rows, int num_columns) {
@@ -72,8 +73,9 @@ void TableLayout::Initialize(int num_rows, int num_columns) {
   row_rect_padding_pixels_ = 0;
   row_height_ = 0;
   vscroll_width_pixels_ = 0;
-  padding_top_    = 1;
-  padding_bottom_ = 2;
+  padding_top_    = 2;
+  padding_bottom_ = 1;
+  verPad_         = 3;
 
   column_width_list_.clear();
   column_width_list_.resize(num_columns);
@@ -111,6 +113,7 @@ void TableLayout::SetVerPad(int padding_top, int padding_bottom) {
 
   padding_top_    = padding_top;
   padding_bottom_ = padding_bottom;
+  verPad_         = padding_top + padding_bottom;
 }
 
 void TableLayout::SetRowRectPadding(int width_pixels) {
@@ -210,7 +213,7 @@ void TableLayout::FreezeLayout() {
                      minimum_header_size_.height +   // header height
                      all_cell_height +               // sum of all cell
                      minimum_footer_size_.height +   // footer height
-                     padding_top_ + padding_bottom_; // paddings for first and last row
+                     verPad_;                        // paddings for first and last row
 
   total_size_ = Size(width, height);
   layout_frozen_ = true;
@@ -286,10 +289,9 @@ Rect TableLayout::GetFooterRect() const {
     return Rect();
   }
 
-  const int top = total_size_.height -            // total width
-                  minimum_footer_size_.height -   // footer height
-                  window_border_pixels_ +         // border bottom
-                  padding_top_ + padding_bottom_; // paddings for first and last row
+  const int top = total_size_.height -           // total height
+                  minimum_footer_size_.height -  // footer height
+                  window_border_pixels_;         // border bottom
 
   const int width = total_size_.width -         // total width
                     window_border_pixels_ * 2;  // border left and right
@@ -310,11 +312,10 @@ Rect TableLayout::GetVScrollBarRect() const {
   const int top = window_border_pixels_ +       // border top
                   minimum_header_size_.height;  // header height
 
-  const int height = total_size_.height -            // total height
-                     window_border_pixels_ * 2 -     // border top and bottom
-                     minimum_header_size_.height -   // header height
-                     minimum_footer_size_.height +   // footer height
-                     padding_top_ + padding_bottom_; // paddings for first and last row
+  const int height = total_size_.height -           // total height
+                     window_border_pixels_ * 2 -    // border top and bottom
+                     minimum_header_size_.height -  // header height
+                     minimum_footer_size_.height;   // footer height
 
   return Rect(left, top, vscroll_width_pixels_, height);
 }
@@ -385,8 +386,7 @@ Rect TableLayout::GetColumnRect(int column) const {
 
   const int width = column_width_list_[column];
 
-  const int height = row_height_ * number_of_rows_ +
-                     padding_top_ + padding_bottom_;
+  const int height = row_height_ * number_of_rows_ + verPad_;
 
   return Rect(left, top, width, height);
 }
@@ -394,9 +394,10 @@ Rect TableLayout::GetColumnRect(int column) const {
 // ------------------------------------------------------------------------
 // Parameter getters
 // ------------------------------------------------------------------------
-int TableLayout::number_of_rows() const { return number_of_rows_; }
-
+int TableLayout::number_of_rows()    const { return number_of_rows_; }
 int TableLayout::number_of_columns() const { return number_of_columns_; }
+int TableLayout::padding_top()       const { return padding_top_; }
+int TableLayout::padding_bottom()    const { return padding_bottom_; }
 
 }  // namespace renderer
 }  // namespace mozc
